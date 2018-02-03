@@ -1,15 +1,23 @@
-const http = require('http');
+var express = require('express');
 
-//ip: 10.107.93.45
-const hostname = 'localhost';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
+var app = express();
+app.get('/', function(req, res) {
+  res.send('Hello from Florida Gators!!! \n');
 });
 
-server.listen(port, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+require('./pursuit-of-happiness-route')(app);
+app.listen(4000);
+
+console.log('Listening on port 4000...');
+
+// app.get('/googlevision', function(req, res) {
+//   res.send('Return reply from Google Vision Endpoint');
+// });
+
+// app.get('/mongo', function(req, res) {
+//   res.send('Return reply from mongo endpoint');
+// });
+
+// app.get('/test', function(req, res) {
+//   res.send('This is for testing purpose!');
+// });
