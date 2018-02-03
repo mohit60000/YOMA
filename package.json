@@ -1,0 +1,29 @@
+{
+  "name": "emot",
+  "version": "1.0.0",
+  "description": "EMOT MangoHacks 2018",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohit60000/pursuit-of-happiness.git"
+  },
+  "author": "Mohit Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohit60000/pursuit-of-happiness/issues"
+  },
+  "homepage": "https://github.com/mohit60000/pursuit-of-happiness#readme",
+  "devDependencies": {
+    "nodemon": "^1.14.12"
+  },
+  "dependencies": {
+    "@google-cloud/vision": "^0.15.0",
+    "express": "^4.16.2",
+    "gcloud": "^0.37.2",
+    "google-cloud": "^0.57.0"
+  }
+}
