@@ -5,4 +5,6 @@ module.exports = function(app){
     app.post('/test', poh.add);
     app.put('/test/:id', poh.update);
     app.delete('/test/:id', poh.delete);
+
+    app.get('/import', poh.import);
 }
