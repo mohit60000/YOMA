@@ -71,7 +71,7 @@ exports.findAll = function(req, res){
 exports.findById = function() {};
 
 exports.add = function(req, res) {
-  console.log(req);
+  console.log(db);
     db.collections.users.save(
       {user: req.query}
     );
