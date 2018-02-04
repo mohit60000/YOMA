@@ -76,6 +76,38 @@ exports.add = function(req, res) {
       {user: req.query}
     );
     res.end();
+
+  };
+
+exports.query = function(req, res) {
+  //db.collections.users.find({"userid":"1"});
+  var query={userid:"1"};
+  var imageUrlArr=[]
+  db.collection("users").find(query).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    for(var i=0;i<result.length;i++)
+    {
+      var emotions=result[i].emotions;
+      console.log(emotions);
+      for(var j=0;j<emotions.JOY.length;j++)
+      {
+        var j=emotions.JOY[i];
+        var s=emotions.SORROW[i];
+        if(j=="VERY_LIKELY" || j=="LIKELY" || j=="POSSIBLE" || s=="VERY_LIKELY" || s=="LIKELY" || s=="POSSIBLE")
+        {
+          console.log(result[i].imageUrl);
+          imageUrlArr.push(result[i].imageUrl);          
+        }
+      }
+      console.log("1"+imageUrlArr);
+    }
+    //res.end();
+    res.write(''+imageUrlArr);
+    res.end();
+    db.close();
+  });
+  //console.log("2"+imageUrlArr);
 };
 
 exports.update = function() {};
