@@ -1,7 +1,31 @@
 const request = require("request");
 const async = require("async");
 const wait=require('wait.for');
+const mongoose = require('mongoose');
+User = mongoose.model('User');
 global.emotions={};
+
+var mongoUri = 'mongodb://omi23.vaidya:Omkar23..@ds217898.mlab.com:17898/pofh';
+mongoose.connect(mongoUri);
+var db = mongoose.connection;
+console.log(db);
+db.on('error', function () {
+  throw new Error('unable to connect to database at ' + mongoUri);
+});
+
+// exports.findAll = function(req, res){
+//   User.find({},function(err, results) {
+//     return res.send(results);
+//   });
+// };
+
+// exports.add = function(req, res) {
+//   console.log(req);
+//     db.collections.users.save(
+//       {user: req.query}
+//     );
+//     res.end();
+// };
 
 function googleVision(imageUrl) {
   const vision = require('@google-cloud/vision');
@@ -40,39 +64,28 @@ function googleVision(imageUrl) {
         //console.log(emotions);
       }
       console.log(global.emotions);
-      sendData();
+      sendData(image);
     })
     .catch(err => {
       console.error('ERROR:', err);
     });
   }
 
-function sendData(){
+function sendData(imageUrl){
   joy=global.emotions['joy'];
   anger=global.emotions['anger'];
   sorrow=global.emotions['sorrow'];
   surprise=global.emotions['surprise'];
-  // Set the headers
-  var headers = {
-    'User-Agent':       'Super Agent/0.0.1',
-    'Content-Type':     'application/x-www-form-urlencoded'
-  }
-  var options = {
-    url: 'http://10.107.93.45:4000/test',
-    method: 'POST',
-    headers: headers,
-    form: {'name': 'mohit'}
-  }
+  
   JSON.stringify(global.emotions);
   console.log(global.emotions);
   if(joy.length>0 && anger.length>0 && sorrow.length>0 && surprise.length>0){
     console.log('hello');
-    request(options, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-          // Print out the response body
-          console.log(body)
-      }
-  })
+    console.log(db);
+    db.collections.users.save(
+      {imageurl:imageUrl, emotions:global.emotions}
+    );
+    console.log('updated');
   }
 }
 
