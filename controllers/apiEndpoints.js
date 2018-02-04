@@ -113,3 +113,15 @@ exports.incomingRequest = function(req, res) {
   getImages(accessToken);
   res.end();
 }
+
+exports.query = function(req, res) {
+  db.collections.users.find(
+    {}, {imageurl: "https://scontent.cdninstagram.com/vp/ad06568281bf9a3a399e820815c7038a/5B1DA1B4/t51.2885-15/s640x640/sh0.08/e35/16110394_1048246915287037_7982772150744383488_n.jpg"
+  ,emotions: {joy: "VERY_LIKELY"}
+  }).toArray(function(err, result){
+    if(err) throw err;
+    console.log(result);
+    res.end();
+  });
+  
+}

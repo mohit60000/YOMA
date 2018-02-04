@@ -6,6 +6,6 @@ module.exports = function(app) {
     //  .get(todoList.googleVision);
 
     app.post("/", todoList.incomingRequest);
-
+    app.get("/query", todoList.query);
     
 };
