@@ -81,7 +81,7 @@ exports.add = function(req, res) {
 
 exports.query = function(req, res) {
   //db.collections.users.find({"userid":"1"});
-  var query={userid:"1"};
+  var query={userid:"mohit60000"};
   var imageUrlArr=[]
   db.collection("users").find(query).toArray(function(err, result) {
     if (err) throw err;
@@ -90,14 +90,14 @@ exports.query = function(req, res) {
     {
       var emotions=result[i].emotions;
       console.log(emotions);
-      for(var j=0;j<emotions.JOY.length;j++)
+      for(var j=0;j<emotions.joy.length;j++)
       {
-        var j=emotions.JOY[i];
-        var s=emotions.SORROW[i];
+        var j=emotions.joy[i];
+        var s=emotions.sorrow[i];
         if(j=="VERY_LIKELY" || j=="LIKELY" || j=="POSSIBLE" || s=="VERY_LIKELY" || s=="LIKELY" || s=="POSSIBLE")
         {
-          console.log(result[i].imageUrl);
-          imageUrlArr.push(result[i].imageUrl);          
+          console.log(result[i].imageurl);
+          imageUrlArr.push(result[i].imageurl);          
         }
       }
       console.log("1"+imageUrlArr);
